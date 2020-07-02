@@ -27,11 +27,10 @@ class TextElement extends BaseElement
     public function getMarkUp()
     {
         return <<<EOT
-<element>
+<element required="$this->required">
     <element_type>text</element_type>
     <name>$this->name</name>
     <display>$this->display</display>
-    <required>$this->required</required>
     <default_value>$this->defaultValue</default_value>
 </element>
 EOT;

@@ -54,13 +54,14 @@ class MessageMarkUpGenerator
 
     /**
      * @param $text
-     * @param $link_text
-     * @param $link_url
+     * @param $linkText
+     * @param $linkUrl
+     * @param $linkNewTab
      * @return MessageMarkUpGenerator
      */
-    public function addTextMessageWithLink($text, $link_text, $link_url)
+    public function addTextMessageWithLink($text, $linkText, $linkUrl, $linkNewTab)
     {
-        $this->messages[] = new TextMessageWithLink($text, $link_text, $link_url);
+        $this->messages[] = new TextMessageWithLink($text, $linkText, $linkUrl, $linkNewTab);
         return $this;
     }
 

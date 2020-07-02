@@ -6,26 +6,30 @@ class TextMessageWithLink
 {
     public $text;
 
-    public $link_text;
+    public $linkText;
 
-    public $link_url;
+    public $linkUrl;
 
     /**
      * TextMessageWithLink constructor.
      * @param $text
+     * @param $linkText
+     * @param $linkUrl
+     * @param bool $linkNewTab
      */
-    public function __construct($text, $link_text, $link_url)
+    public function __construct($text, $linkText, $linkUrl, $linkNewTab)
     {
         $this->text = $text;
-        $this->link_text = $link_text;
-        $this->link_url = $link_url;
+        $this->linkText = $linkText;
+        $this->linkUrl = $linkUrl;
+        $this->linkNewTab = ($linkNewTab) ? 'true' : 'false';
     }
 
     public function getMarkUp()
     {
         return <<<EOT
-<text-message>{$this->text} <link><open-new-tab>true</open-new-tab>
-<url>{$this->link_url}</url><text>{$this->link_text}</text></link></text-message>
+<text-message>{$this->text} <link new_tab="$this->linkNewTab">
+<url>{$this->linkUrl}</url><text>{$this->linkText}</text></link></text-message>
 EOT;
     }
 }

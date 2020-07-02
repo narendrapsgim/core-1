@@ -28,10 +28,9 @@ class TranscriptDownloadButton extends BaseButton
         $typeProperty = $this->type != "" ? " type='$this->type'" : "";
 
         return <<<EOT
-<button$typeProperty>
+<button$typeProperty display="$this->display">
     <text>$this->text</text>
     <download>true</download>
-    <display>$this->display</display>
 </button>
 EOT;
     }

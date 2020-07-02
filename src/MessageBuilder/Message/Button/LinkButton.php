@@ -18,7 +18,7 @@ class LinkButton extends BaseButton
      * LinkButton constructor.
      * @param $text
      * @param $link
-     * @param $linkNewTab
+     * @param bool $linkNewTab
      * @param bool $display
      * @param string $type
      */
@@ -36,10 +36,9 @@ class LinkButton extends BaseButton
         $typeProperty = $this->type != "" ? " type='$this->type'" : "";
 
         return <<<EOT
-<button$typeProperty>
+<button$typeProperty display="$this->display">
     <text>$this->text</text>
     <link new_tab="$this->linkNewTab">$this->link</link>
-    <display>$this->display</display>
 </button>
 EOT;
     }

@@ -37,12 +37,11 @@ class AutoCompleteSelectElement extends BaseElement
         }
 
         return <<<EOT
-<element>
+<element required="$this->required">
     <element_type>auto_complete_select</element_type>
     <name>$this->name</name>
     <display>$this->display</display>
     <options>$optionsMarkUp</options>
-    <required>$this->required</required>
     <default_value>$this->defaultValue</default_value>
 </element>
 EOT;

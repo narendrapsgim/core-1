@@ -543,7 +543,7 @@ class WebChatMessageFormatter extends BaseMessageFormatter
                         $openNewTab = $this->convertToBoolean((string)$item->getAttribute('new_tab'));
 
                         $link = [
-                            self::OPEN_NEW_TAB => $openNewTab,
+                            self::LINK_NEW_TAB => $openNewTab,
                             self::TEXT => '',
                             self::URL => '',
                         ];
@@ -556,7 +556,7 @@ class WebChatMessageFormatter extends BaseMessageFormatter
                             $text .= ' ' . $this->generateLinkHtml(
                                 $link[self::URL],
                                 $link[self::TEXT],
-                                $link[self::OPEN_NEW_TAB]
+                                $link[self::LINK_NEW_TAB]
                             );
                         } else {
                             Log::debug('Not adding link to message text, url is empty');
@@ -613,7 +613,13 @@ class WebChatMessageFormatter extends BaseMessageFormatter
         foreach ($item->button as $button) {
             $attributes = $button->attributes();
 
-            $display = ((string)$button->display) ? $this->convertToBoolean((string)$button->display) : true;
+            if ($button['display']) {
+                $display = $this->convertToBoolean((string)$button['display']);
+            } else {
+                // Backward compatibility
+                $display = ((string)$button->display) ? $this->convertToBoolean((string)$button->display) : true;
+            }
+
             $type = $attributes[self::TYPE] ?: "";
 
             if (isset($button->download)) {
@@ -758,7 +764,13 @@ class WebChatMessageFormatter extends BaseMessageFormatter
         foreach ($item->button as $button) {
             $attributes = $button->attributes();
 
-            $display = ((string)$button->display) ? $this->convertToBoolean((string)$button->display) : true;
+            if ($button['display']) {
+                $display = $this->convertToBoolean((string)$button['display']);
+            } else {
+                // Backward compatibility
+                $display = ((string)$button->display) ? $this->convertToBoolean((string)$button->display) : true;
+            }
+
             $type = $attributes[self::TYPE] ?: "";
 
             if (isset($button->download)) {
@@ -839,7 +851,12 @@ class WebChatMessageFormatter extends BaseMessageFormatter
         $elements = [];
 
         foreach ($item->element as $element) {
-            $required = $this->convertToBoolean((string)$element->required) ? true : false;
+            if ($element['required']) {
+                $required = $this->convertToBoolean((string)$element['required']);
+            } else {
+                // Backward compatibility
+                $required = $this->convertToBoolean((string)$element->required);
+            }
 
             $el = [
                 self::ELEMENT_TYPE => trim((string)$element->element_type),

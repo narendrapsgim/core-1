@@ -623,8 +623,9 @@ class ResponseEngineTest extends TestCase
         OutgoingIntent::create(['name' => 'Hello']);
         $intent = OutgoingIntent::where('name', 'Hello')->first();
 
-        // phpcs:ignore
-        $messageMarkUp = (new MessageMarkUpGenerator())->addTextMessageWithLink('This is an example', 'This is a link', 'http://www.example.com');
+        $messageMarkUp = (new MessageMarkUpGenerator())
+            ->addTextMessageWithLink('This is an example', 'This is a link', 'http://www.example.com', true)
+            ->addTextMessageWithLink('This is another example', 'This is another link', 'http://www.example.com', false);
 
         $attributes = ['username' => 'user.name'];
         $parameters = ['value' => 'dummy'];
@@ -654,6 +655,10 @@ class ResponseEngineTest extends TestCase
         $this->assertEquals(
             $messageWrapper->getMessages()[0]->getText(),
             'This is an example <a class="linkified" target="_blank" href="http://www.example.com">This is a link</a>'
+        );
+        $this->assertEquals(
+            $messageWrapper->getMessages()[1]->getText(),
+            'This is another example <a class="linkified" target="_parent" href="http://www.example.com">This is another link</a>'
         );
     }
 
@@ -899,7 +904,7 @@ class ResponseEngineTest extends TestCase
         $intent = OutgoingIntent::where('name', 'Hello')->first();
 
         // phpcs:ignore
-        $messageMarkUp = (new MessageMarkUpGenerator())->addTextMessageWithLink('This is an example', 'This is a link', 'http://www.example.com');
+        $messageMarkUp = (new MessageMarkUpGenerator())->addTextMessageWithLink('This is an example', 'This is a link', 'http://www.example.com', false);
 
         $attributes = ['username' => 'user.name'];
         $parameters = [];

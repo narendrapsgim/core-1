@@ -28,10 +28,9 @@ class TabSwitchButton extends BaseButton
         $typeProperty = $this->type != "" ? " type='$this->type'" : "";
 
         return <<<EOT
-<button$typeProperty>
+<button$typeProperty display="$this->display">
     <text>$this->text</text>
     <tab_switch>true</tab_switch>
-    <display>$this->display</display>
 </button>
 EOT;
     }

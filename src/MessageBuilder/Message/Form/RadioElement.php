@@ -37,12 +37,11 @@ class RadioElement extends BaseElement
         }
 
         return <<<EOT
-<element>
+<element required="$this->required">
     <element_type>radio</element_type>
     <name>$this->name</name>
     <display>$this->display</display>
     <options>$optionsMarkUp</options>
-    <required>$this->required</required>
     <default_value>$this->defaultValue</default_value>
 </element>
 EOT;

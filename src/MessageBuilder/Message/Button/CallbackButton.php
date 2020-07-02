@@ -34,11 +34,10 @@ class CallbackButton extends BaseButton
         $typeProperty = $this->type != "" ? " type='$this->type'" : "";
 
         return <<<EOT
-<button$typeProperty>
+<button$typeProperty display="$this->display">
     <text>$this->text</text>
     <value>$this->value</value>
     <callback>$this->callbackId</callback>
-    <display>$this->display</display>
 </button>
 EOT;
     }

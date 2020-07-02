@@ -152,7 +152,7 @@ EOT;
     public function testButtonMessage()
     {
         // phpcs:ignore
-        $markup = '<message disable_text="1"><button-message clear_after_interaction="1"><text>test</text><button type="yes-button"><text>Yes</text><callback>callback_yes</callback><value>true</value></button><button type="no-button"><text>No</text><callback>callback_no</callback><value>false</value></button><button><text>Hidden</text><callback>hidden</callback><display>false</display></button></button-message></message>';
+        $markup = '<message disable_text="1"><button-message clear_after_interaction="1"><text>test</text><button type="yes-button"><text>Yes</text><callback>callback_yes</callback><value>true</value></button><button type="no-button"><text>No</text><callback>callback_no</callback><value>false</value></button><button><text>Hidden</text><callback>hidden</callback><display>false</display></button><button display="false"><text>Hidden button</text><callback>hidden</callback></button></button-message></message>';
         $formatter = new WebChatMessageFormatter();
 
         /** @var OpenDialogMessage[] $messages */
@@ -176,6 +176,13 @@ EOT;
             ],
             [
                 'text' => 'Hidden',
+                'callback_id' => 'hidden',
+                'value' => '',
+                'display' => false,
+                'type' => ''
+            ],
+            [
+                'text' => 'Hidden button',
                 'callback_id' => 'hidden',
                 'value' => '',
                 'display' => false,
